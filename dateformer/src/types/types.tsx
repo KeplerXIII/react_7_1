@@ -6,8 +6,3 @@ export type VideoProps = {
 export type VideoListProps = {
   list: VideoProps[]
 }
-
-export type Video = {
-  url: string
-  date: string
-}

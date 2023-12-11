@@ -1,6 +1,6 @@
-import { Video } from '../types/types'
+import { VideoProps } from '../types/types'
 
-export const VideoListData: Video[] = [
+export const VideoListData: VideoProps[] = [
   {
     url:
       'https://www.youtube.com/embed/rN6nlNC9WQA?rel=0&amp;controls=0&amp;showinfo=0',

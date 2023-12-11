@@ -1,6 +1,5 @@
 import { VideoProps, VideoListProps } from '../types/types'
-import { DateTime } from './dateForm'
-
+import { PrettyDateTime as DateTime } from './dateForm'
 
 function Video({ url, date }: VideoProps) {
   return (
