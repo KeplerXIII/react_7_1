@@ -20,13 +20,12 @@ const DateTime = ({ date }: Pick<VideoProps, 'date'>) => (
 )
 
 const withPrettier = (
-  WrappedComponent: React.ComponentType<{ date:string }>
+  WrappedComponent: React.ComponentType<{ date: string }>
 ) => (props: { date: string }) => {
-
   const targetDate = moment(props.date, 'YYYY-MM-DD HH:mm:ss')
   const formedTime = formatTimeDifference(targetDate)
 
-  return <WrappedComponent {...props} date={formedTime}/>
+  return <WrappedComponent {...props} date={formedTime} />
 }
 
 export const PrettyDateTime = withPrettier(DateTime)
