@@ -1,19 +1,32 @@
-import React from 'react';
-import moment from 'moment';
+import React from 'react'
+import moment from 'moment'
 import { VideoProps } from '../types/types'
 
-const DateTime = ({ date }: Pick<VideoProps, 'date'>) => <p className='date'>{date}</p>;
+function formatTimeDifference(targetDate: moment.Moment) {
+  const now = moment()
+  const diff = moment.duration(now.diff(targetDate))
 
-// HOC для улучшения стиля
-const withPrettier = (WrappedComponent: React.ComponentType<{ date: string }>) => (
-  (props: { date: string }) => {
-    // Добавьте свою логику для улучшения стиля здесь
-    console.log(props)
-
-    return <WrappedComponent {...props} />;
+  if (diff.asMinutes() < 60) {
+    return `${Math.floor(diff.asMinutes())} минут назад`
+  } else if (diff.asHours() < 24) {
+    return `${Math.floor(diff.asHours())} часов назад`
+  } else {
+    return `${Math.floor(diff.asDays())} дней назад`
   }
-);
+}
 
-// Создайте новый компонент с улучшенным стилем
-export const PrettyDateTime = withPrettier(DateTime);
+const DateTime = ({ date }: Pick<VideoProps, 'date'>) => (
+  <p className='date'>{date}</p>
+)
 
+const withPrettier = (
+  WrappedComponent: React.ComponentType<{ date:string }>
+) => (props: { date: string }) => {
+
+  const targetDate = moment(props.date, 'YYYY-MM-DD HH:mm:ss')
+  const formedTime = formatTimeDifference(targetDate)
+
+  return <WrappedComponent {...props} date={formedTime}/>
+}
+
+export const PrettyDateTime = withPrettier(DateTime)
